@@ -11,22 +11,11 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class PessoaBean {
 
-    private final String sTitle = Pessoa.sTitle;
-    private final String pTitle = Pessoa.pTitle;
-
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO dao = new PessoaDAO();
     private DataModel pessoas;
 
     public PessoaBean() {
-    }
-
-    public String getsTitle() {
-        return sTitle;
-    }
-
-    public String getpTitle() {
-        return pTitle;
     }
 
     public Pessoa getPessoa() {

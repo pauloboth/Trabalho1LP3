@@ -12,12 +12,9 @@ import javax.persistence.Table;
 @Table(name = "pessoa")
 public class Pessoa implements Serializable {
 
-    public static final String sTitle = "Pessoa";
-    public static final String pTitle = "Pessoas";
-
     @Id
-    @SequenceGenerator(name = "pes_codigo", sequenceName = "seq_pes_codigo")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "pes_codigo")
+    @SequenceGenerator(name = "pes_id", sequenceName = "seq_pes_id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "pes_id")
     private int pes_codigo;
 
     private String pes_nome;

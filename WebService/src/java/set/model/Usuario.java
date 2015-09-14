@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
     private boolean usu_status;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo", nullable = false)
+    @JoinColumn(name = "pes_id", referencedColumnName = "pes_id", nullable = false)
     private Pessoa pessoa;
     
     @OneToMany
