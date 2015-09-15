@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://172.20.156.161:8080/Seriplast/ClienteService?wsdl" uri="wsdl/172.20.156.161_8080/Seriplast/ClienteService.wsdl"/>
+    <system systemId="http://172.20.156.161:8080/Seriplast/ClienteService?xsd=1" uri="wsdl/172.20.156.161_8080/Seriplast/ClienteService.xsd_1.xsd"/>
+</catalog>

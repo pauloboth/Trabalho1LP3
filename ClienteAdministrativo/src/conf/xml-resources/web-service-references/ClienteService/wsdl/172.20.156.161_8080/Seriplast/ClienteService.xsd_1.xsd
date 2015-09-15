@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://service/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service/">
+
+<xs:element name="DeleteCategoria" type="tns:DeleteCategoria"/>
+
+<xs:element name="DeleteCategoriaResponse" type="tns:DeleteCategoriaResponse"/>
+
+<xs:element name="DeleteProduto" type="tns:DeleteProduto"/>
+
+<xs:element name="DeleteProdutoResponse" type="tns:DeleteProdutoResponse"/>
+
+<xs:element name="InsertCategoria" type="tns:InsertCategoria"/>
+
+<xs:element name="InsertCategoriaResponse" type="tns:InsertCategoriaResponse"/>
+
+<xs:element name="InsertProduto" type="tns:InsertProduto"/>
+
+<xs:element name="InsertProdutoResponse" type="tns:InsertProdutoResponse"/>
+
+<xs:element name="SelectAllCategoria" type="tns:SelectAllCategoria"/>
+
+<xs:element name="SelectAllCategoriaResponse" type="tns:SelectAllCategoriaResponse"/>
+
+<xs:element name="SelectAllProduto" type="tns:SelectAllProduto"/>
+
+<xs:element name="SelectAllProdutoResponse" type="tns:SelectAllProdutoResponse"/>
+
+<xs:element name="SelectOneCategoria" type="tns:SelectOneCategoria"/>
+
+<xs:element name="SelectOneCategoriaResponse" type="tns:SelectOneCategoriaResponse"/>
+
+<xs:element name="SelectOneProduto" type="tns:SelectOneProduto"/>
+
+<xs:element name="SelectOneProdutoResponse" type="tns:SelectOneProdutoResponse"/>
+
+<xs:element name="UpdateCategoria" type="tns:UpdateCategoria"/>
+
+<xs:element name="UpdateCategoriaResponse" type="tns:UpdateCategoriaResponse"/>
+
+<xs:element name="UpdateProduto" type="tns:UpdateProduto"/>
+
+<xs:element name="UpdateProdutoResponse" type="tns:UpdateProdutoResponse"/>
+
+<xs:complexType name="SelectOneCategoria">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SelectOneCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:categoria" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="categoria">
+<xs:sequence>
+<xs:element name="cat_descricao" type="xs:string" minOccurs="0"/>
+<xs:element name="cat_id" type="xs:int"/>
+<xs:element name="cat_nome" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertProduto">
+<xs:sequence>
+<xs:element name="arg0" type="tns:produto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="produto">
+<xs:sequence>
+<xs:element name="categoria" type="tns:categoria" minOccurs="0"/>
+<xs:element name="pro_cadastro" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="pro_descricao" type="xs:string" minOccurs="0"/>
+<xs:element name="pro_estoque" type="xs:int"/>
+<xs:element name="pro_id" type="xs:int"/>
+<xs:element name="pro_nome" type="xs:string" minOccurs="0"/>
+<xs:element name="pro_status" type="xs:int"/>
+<xs:element name="pro_tipo" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertProdutoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SelectAllProduto">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="SelectAllProdutoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:produto" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SelectOneProduto">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SelectOneProdutoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:produto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DeleteCategoria">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DeleteCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateProduto">
+<xs:sequence>
+<xs:element name="arg0" type="tns:produto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateProdutoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SelectAllCategoria">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="SelectAllCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:categoria" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DeleteProduto">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DeleteProdutoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateCategoria">
+<xs:sequence>
+<xs:element name="arg0" type="tns:categoria" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UpdateCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertCategoria">
+<xs:sequence>
+<xs:element name="arg0" type="tns:categoria" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
