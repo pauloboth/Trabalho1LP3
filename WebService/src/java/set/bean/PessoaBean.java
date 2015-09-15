@@ -56,7 +56,7 @@ public class PessoaBean {
     }
 
     public String salvar() {
-        if (pessoa.getPes_codigo() > 0) {
+        if (pessoa.getPes_id() > 0) {
             dao.update(pessoa);
         } else {
             dao.insert(pessoa);

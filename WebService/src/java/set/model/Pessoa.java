@@ -15,19 +15,19 @@ public class Pessoa implements Serializable {
     @Id
     @SequenceGenerator(name = "pes_id", sequenceName = "seq_pes_id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "pes_id")
-    private int pes_codigo;
+    private int pes_id;
 
     private String pes_nome;
 
     public Pessoa() {
     }
 
-    public int getPes_codigo() {
-        return pes_codigo;
+    public int getPes_id() {
+        return pes_id;
     }
 
-    public void setPes_codigo(int pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPes_id(int pes_id) {
+        this.pes_id = pes_id;
     }
 
     public String getPes_nome() {
@@ -41,7 +41,7 @@ public class Pessoa implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + this.pes_codigo;
+        hash = 79 * hash + this.pes_id;
         return hash;
     }
 
@@ -54,7 +54,7 @@ public class Pessoa implements Serializable {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (this.pes_codigo != other.pes_codigo) {
+        if (this.pes_id != other.pes_id) {
             return false;
         }
         return true;

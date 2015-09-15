@@ -26,6 +26,7 @@
                         </f:facet>
                         <h:outputText value="${item.getPro_nome()}"/>
                     </h:column>
+
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
@@ -34,6 +35,7 @@
                             <i class="fa fa-pencil"></i> Editar
                         </h:commandLink>
                     </h:column>
+
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
@@ -41,7 +43,8 @@
                         <h:commandLink onclick="return confirm('Deseja realmente excluir o Produto?');" action="${produtoBean.delete(item)}">
                             <i class="fa fa-trash"></i> Excluir
                         </h:commandLink>
-                    </h:column>
+                    </h:column> 
+
                 </h:dataTable>
             </h:form>
         </div>

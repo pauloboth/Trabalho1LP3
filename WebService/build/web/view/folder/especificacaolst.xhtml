@@ -26,35 +26,25 @@
                         </f:facet>
                         <h:outputText value="${item.getEsp_nome()}"/>
                     </h:column>
-                    <!--                    <h:column headerClass="col-editar-header">
-                                            <f:facet name="header">
-                                                <h:outputText value="Opções"/>
-                                            </f:facet>
-                                            <h:commandButton action="${especificacaoBean.edit(item)}">  <i class="fa fa-pencil"></i></h:commandButton>
-                                            <h:commandButton onclick="return confirm('Deseja realmente excluir a Especificação?');" action="${especificacaoBean.delete(item)}">  <i class="fa fa-trash"></i></h:commandButton>
-                                            <h:commandLink action="${especificacaoBean.edit(item)}">
-                                                <i class="fa fa-pencil"></i> Editar
-                                            </h:commandLink>
-                    
-                                            <f:facet name="header">
-                                                <h:outputText value="Excluir"/>
-                                            </f:facet>
-                                        </h:column>-->
+
 
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
-                            <h:outputText value="Opções"/>
+                            <h:outputText value="Editar"/>
                         </f:facet>
-
                         <h:commandLink action="${especificacaoBean.edit(item)}">
-                            <i class="fa fa-pencil btn btn-primary btn-xs" title="Editar"></i>
+                            <i class="fa fa-pencil"></i> Editar
                         </h:commandLink>
-
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir a Especificação?');" action="${especificacaoBean.delete(item)}">
-                            <i class="fa fa-trash btn btn-danger btn-xs" title="Excluir"></i>
-                        </h:commandLink>
-
                     </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir a Especificação?');" action="${especificacaoBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column> 
+
                 </h:dataTable>
             </h:form>
         </div>

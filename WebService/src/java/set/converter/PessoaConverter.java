@@ -18,6 +18,6 @@ public class PessoaConverter implements javax.faces.convert.Converter {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
-        return "" + ((Pessoa) object).getPes_codigo();
+        return "" + ((Pessoa) object).getPes_id();
     }
 }
