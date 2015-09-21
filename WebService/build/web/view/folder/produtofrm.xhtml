@@ -3,8 +3,72 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:define name="header">
+        <script type="text/javascript">
+            function bindClickEsp() {
+                console.log("bindClickEsp");
+                $('.esp-link').click(function (event) {
+                    if (!($(event.target).hasClass('btn') || $(event.target).hasClass('fa'))) { //clique nos botões
+                        var $link = $(this);
+                        var $form = $('.esp-form[data-esp=' + $(this).data('esp') + ']');
+                        $link.addClass('hidden');
+                        $form.removeClass('hidden');
+                        $('.Esp', $form).focus();
+                    }
+                    return false;
+                });
+                shEsp();
+            }
 
+            function shEsp() {
+                console.log("shEsp");
+                $('.Esp').each(function (i, e) {
+                    var id = $(e).data('esp');
+                    var $link = $('.esp-link[data-esp=' + id + ']');
+                    var $form = $('.esp-form[data-esp=' + id + ']');
+                    if ($(e).val() === "") {
+                        $form.removeClass('hidden');
+                        $link.addClass('hidden');
+                    } else {
+                    }
+                });
+            }
+            function saveEsp(id) {
+                console.log("saveEsp");
+                var $link = $('.esp-link[data-esp=' + id + ']');
+                var $form = $('.v-form[data-esp=' + id + ']');
+                if ($('.Esp', $form).val() === "") {
+                    $('.Esp', $form).parent().addClass('has-error has-feedback');
+                    $('.Esp', $form).attr('placeholder', 'Por favor, preencha a especificação');
+                    $('.Esp', $form).focus();
+                } else {
+                    $link.removeClass('hidden');
+                    $form.addClass('hidden');
+                }
+                return false;
+            }
+            //http://stackoverflow.com/questions/13540298/proccess-onclick-function-after-ajax-call-fajax
+            function ajaxEspecificacao(data) {
+                console.log("ajaxEspecificacao");
+                console.log(data);
+                switch (data.status) {
+                    case "begin":
+                        break;
+                    case "complete":
+                        break;
+                    case "success":
+                        bindClickEsp();
+                        break;
+                }
+            }
+
+            $(function () {
+                bindClickEsp();
+            });
+        </script>
+    </ui:define>
     <ui:define name="title">Produtos</ui:define>
 
     <ui:define name="breadcrumb">
@@ -21,7 +85,7 @@
         <div class="panel panel-body">
             <h3><h:outputText value="Dados do Produto"/></h3>
             <f:view>
-                <h:form styleClass="form-horizontal">
+                <h:form styleClass="form-horizontal" id="frmProduto">
                     <h:inputHidden id="idiCodigo" value="#{produtoBean.produto.pro_id}" />
                     <div class="row">
 
@@ -99,7 +163,54 @@
 
                     </div>
 
+                    <h:panelGroup layout="block" id="forEachEspecificacoes">
+                        <div class="especificacoes form-group list-group">
+                            <c:forEach items="#{produtoBean.produto.produtoEsp}" var="proEsp" varStatus="loopEsp">
+                                <div class="col-xs-12" style="margin-bottom: 15px;">
+                                    <div class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-1 btn-group pull-right">
+                                                <h:commandLink immediate="true" styleClass="btn btn-danger" action="#{produtoBean.deProdutoEsp(proEsp)}">
+                                                    <f:ajax execute="@form"
+                                                            render="frmProduto:forEachEspecificacoes" 
+                                                            onevent="ajaxEspecificacao" />
+                                                    <i class="fa fa-remove"></i>
+                                                </h:commandLink>
+                                            </div>
+                                            <div class="col-md-6 col-xs-12">
+                                                <div class="row">
+                                                    <label for="especificacao" class="col-sm-4 control-label">Especificação: </label>
+                                                    <div class="col-sm-8">
+                                                        <h:selectOneMenu id="especificacao" converter="especificacaoConverter" value="#{proEsp.especificacao}" styleClass="form-control" pt:autofocus="" >
+                                                            <f:selectItems value="#{produtoBean.lsEspecificacoes}" var="esp" itemLabel="#{esp.toString()}" itemValue="#{esp}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="col-md-5 col-xs-12">
+                                                <div class="row">
+                                                    <label for="valorEsp" class="col-sm-3 control-label">Valor: </label>
+                                                    <div class="col-sm-9">
+                                                        <h:inputText pt:placeholder="Valor da Especificação" value="#{proEsp.prs_descricao}" title="Valor da Especificação" styleClass="form-control Esp" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+                            <div class="col-xs-12">
+                                <h:commandLink immediate="true" styleClass="list-group-item list-group-item-success text-center" action="#{produtoBean.addProdutoEsp}">
+                                    <f:ajax execute="@all"
+                                            render="frmProduto:forEachEspecificacoes" 
+                                            onevent="ajaxEspecificacao" />
+                                    <i class="fa fa-plus"></i>Adicionar Especificação
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </h:panelGroup>
 
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">

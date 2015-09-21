@@ -26,7 +26,7 @@ public class CategoriaDAO {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
-        session.close();
+//        session.close();
     }
 
     public void update(Categoria i) {
@@ -34,7 +34,7 @@ public class CategoriaDAO {
         Transaction t = session.beginTransaction();
         session.merge(i);
         t.commit();
-        session.close();
+//        session.close();
     }
 
     public void delete(Categoria i) {
@@ -42,20 +42,20 @@ public class CategoriaDAO {
         Transaction t = session.beginTransaction();
         session.delete(i);
         t.commit();
-        session.close();
+//        session.close();
     }
 
     public Categoria findById(int id) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Categoria m = (Categoria) session.get(Categoria.class, id);
-        session.close();
+        Categoria m = (Categoria) session.load(Categoria.class, id);
+//        session.close();
         return m;
     }
 
     public List<Categoria> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Categoria> ls = session.createQuery("from Categoria").list();
-        session.close();
+//        session.close();
         return ls;
     }
 

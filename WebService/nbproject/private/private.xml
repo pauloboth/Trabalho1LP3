@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/set/model/Usuario.java</file>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/set/bean/PessoaBean.java</file>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/set/model/Pessoa.java</file>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/set/model/Grupo.java</file>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/web/login.xhtml</file>
+            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/dao/ProdutoDAO.java</file>
+            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/bean/ProdutoBean.java</file>
+            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/web/view/folder/produtofrm.xhtml</file>
+            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/model/Produto.java</file>
         </group>
     </open-files>
 </project-private>

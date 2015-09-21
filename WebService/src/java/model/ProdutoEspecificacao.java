@@ -44,6 +44,5 @@ public class ProdutoEspecificacao implements Serializable {
     public void setPrs_descricao(String prs_descricao) {
         this.prs_descricao = prs_descricao;
     }
-    
-    
+
 }
