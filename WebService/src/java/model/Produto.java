@@ -1,11 +1,11 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "produto")
 public class Produto implements Serializable {
 
     @Id
@@ -33,9 +35,8 @@ public class Produto implements Serializable {
     @JoinColumn(name = "cat_id", referencedColumnName = "cat_id")
     private Categoria categoria;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name = "pro_id", referencedColumnName = "pro_id")
-    private List<ProdutoEspecificacao> produto_esp;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ProdutoEspecificacao> lsProdutoEspecificacao;
 
     public Produto() {
     }
@@ -112,6 +113,14 @@ public class Produto implements Serializable {
         this.pro_preco = pro_preco;
     }
 
+    public List<ProdutoEspecificacao> getLsProdutoEspecificacao() {
+        return lsProdutoEspecificacao;
+    }
+
+    public void setLsProdutoEspecificacao(List<ProdutoEspecificacao> lsProdutoEspecificacao) {
+        this.lsProdutoEspecificacao = lsProdutoEspecificacao;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -138,25 +147,4 @@ public class Produto implements Serializable {
         return getPro_nome();
     }
 
-    public void addProdutoEsp() {
-        if (this.produto_esp == null) {
-            this.produto_esp = new ArrayList<>();
-        }
-        ProdutoEspecificacao e = new ProdutoEspecificacao();
-        this.produto_esp.add(e);
-    }
-
-    public List<ProdutoEspecificacao> getProdutoEsp() {
-        return produto_esp;
-    }
-
-    public void setProdutoEsp(List<ProdutoEspecificacao> proesp) {
-        this.produto_esp = proesp;
-    }
-
-    public void deProdutoEsp(ProdutoEspecificacao p) {
-        if (this.produto_esp != null) {
-            this.produto_esp.remove(p);
-        }
-    }
 }

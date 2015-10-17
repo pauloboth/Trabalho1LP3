@@ -23,39 +23,39 @@ public class EspecificacaoDAO {
 
     public void insert(Especificacao i) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
+        session.getTransaction().begin();
         session.save(i);
-        t.commit();
-//        session.close();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void update(Especificacao i) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        session.merge(i);
-        t.commit();
-//        session.close();
+        session.getTransaction().begin();
+        session.update(i);
+        session.getTransaction().commit();
+        session.close();
     }
 
     public void delete(Especificacao i) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
+        session.getTransaction().begin();
         session.delete(i);
-        t.commit();
-//        session.close();
+        session.getTransaction().commit();
+        session.close();
     }
 
     public Especificacao findById(int id) {
         session = HibernateUtil.getSessionFactory().openSession();
         Especificacao m = (Especificacao) session.load(Especificacao.class, id);
-//        session.close();
+        session.close();
         return m;
     }
 
     public List<Especificacao> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Especificacao> ls = session.createQuery("from Especificacao").list();
-//        session.close();
+        session.close();
         return ls;
     }
 

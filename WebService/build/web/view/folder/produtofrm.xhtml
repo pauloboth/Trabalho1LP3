@@ -6,68 +6,6 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="header">
-        <script type="text/javascript">
-            function bindClickEsp() {
-                console.log("bindClickEsp");
-                $('.esp-link').click(function (event) {
-                    if (!($(event.target).hasClass('btn') || $(event.target).hasClass('fa'))) { //clique nos botões
-                        var $link = $(this);
-                        var $form = $('.esp-form[data-esp=' + $(this).data('esp') + ']');
-                        $link.addClass('hidden');
-                        $form.removeClass('hidden');
-                        $('.Esp', $form).focus();
-                    }
-                    return false;
-                });
-                shEsp();
-            }
-
-            function shEsp() {
-                console.log("shEsp");
-                $('.Esp').each(function (i, e) {
-                    var id = $(e).data('esp');
-                    var $link = $('.esp-link[data-esp=' + id + ']');
-                    var $form = $('.esp-form[data-esp=' + id + ']');
-                    if ($(e).val() === "") {
-                        $form.removeClass('hidden');
-                        $link.addClass('hidden');
-                    } else {
-                    }
-                });
-            }
-            function saveEsp(id) {
-                console.log("saveEsp");
-                var $link = $('.esp-link[data-esp=' + id + ']');
-                var $form = $('.v-form[data-esp=' + id + ']');
-                if ($('.Esp', $form).val() === "") {
-                    $('.Esp', $form).parent().addClass('has-error has-feedback');
-                    $('.Esp', $form).attr('placeholder', 'Por favor, preencha a especificação');
-                    $('.Esp', $form).focus();
-                } else {
-                    $link.removeClass('hidden');
-                    $form.addClass('hidden');
-                }
-                return false;
-            }
-            //http://stackoverflow.com/questions/13540298/proccess-onclick-function-after-ajax-call-fajax
-            function ajaxEspecificacao(data) {
-                console.log("ajaxEspecificacao");
-                console.log(data);
-                switch (data.status) {
-                    case "begin":
-                        break;
-                    case "complete":
-                        break;
-                    case "success":
-                        bindClickEsp();
-                        break;
-                }
-            }
-
-            $(function () {
-                bindClickEsp();
-            });
-        </script>
     </ui:define>
     <ui:define name="title">Produtos</ui:define>
 
@@ -163,53 +101,53 @@
 
                     </div>
 
-                    <h:panelGroup layout="block" id="forEachEspecificacoes">
-                        <div class="especificacoes form-group list-group">
-                            <c:forEach items="#{produtoBean.produto.produtoEsp}" var="proEsp" varStatus="loopEsp">
-                                <div class="col-xs-12" style="margin-bottom: 15px;">
-                                    <div class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-xs-1 btn-group pull-right">
-                                                <h:commandLink immediate="true" styleClass="btn btn-danger" action="#{produtoBean.deProdutoEsp(proEsp)}">
-                                                    <f:ajax execute="@form"
-                                                            render="frmProduto:forEachEspecificacoes" 
-                                                            onevent="ajaxEspecificacao" />
-                                                    <i class="fa fa-remove"></i>
-                                                </h:commandLink>
-                                            </div>
-                                            <div class="col-md-6 col-xs-12">
-                                                <div class="row">
-                                                    <label for="especificacao" class="col-sm-4 control-label">Especificação: </label>
-                                                    <div class="col-sm-8">
-                                                        <h:selectOneMenu id="especificacao" converter="especificacaoConverter" value="#{proEsp.especificacao}" styleClass="form-control" pt:autofocus="" >
-                                                            <f:selectItems value="#{produtoBean.lsEspecificacoes}" var="esp" itemLabel="#{esp.toString()}" itemValue="#{esp}"/>
-                                                        </h:selectOneMenu>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    <h:panelGroup layout="block">
+                        <h3><b>Especificações deste produto:</b></h3>
+                        <h:panelGroup layout="block" class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-2 btn-group pull-right">
+                                    <h:commandLink styleClass="btn btn-primary" action="#{produtoBean.addEspecificacao()}">
+                                        <f:ajax execute="@form" render="@form" />
+                                        <i class="fa fa-plus" style="margin-right: 3px"></i>Adicionar
+                                    </h:commandLink>
+                                </div>
 
-                                            <div class="col-md-5 col-xs-12">
-                                                <div class="row">
-                                                    <label for="valorEsp" class="col-sm-3 control-label">Valor: </label>
-                                                    <div class="col-sm-9">
-                                                        <h:inputText pt:placeholder="Valor da Especificação" value="#{proEsp.prs_descricao}" title="Valor da Especificação" styleClass="form-control Esp" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="col-md-7 col-xs-12">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Especificação: </label>
+                                        <div class="col-xs-7">
+                                            <h:selectOneMenu converter="especificacaoConverter" value="#{produtoBean.especificacao}" styleClass="form-control" pt:autofocus="" >
+                                                <f:selectItems value="#{produtoBean.lsEspecificacao}" var="esp" itemLabel="#{esp.toString()}" itemValue="#{esp}"/>
+                                            </h:selectOneMenu>
                                         </div>
                                     </div>
                                 </div>
-                            </c:forEach>
-
-                            <div class="col-xs-12">
-                                <h:commandLink immediate="true" styleClass="list-group-item list-group-item-success text-center" action="#{produtoBean.addProdutoEsp}">
-                                    <f:ajax execute="@all"
-                                            render="frmProduto:forEachEspecificacoes" 
-                                            onevent="ajaxEspecificacao" />
-                                    <i class="fa fa-plus"></i>Adicionar Especificação
-                                </h:commandLink>
                             </div>
-                        </div>
+                        </h:panelGroup>
+
+
+                        <h:dataTable value="#{produtoBean.produto.lsProdutoEspecificacao}" var="item" styleClass="table table-bordered table-striped">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Especificação"/>
+                                </f:facet>
+                                <h:outputText value="#{item.especificacao.esp_nome}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Valor"/>
+                                </f:facet>
+                                <h:inputText pt:type="text" value="#{item.prs_descricao}" class="form-control"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Remover</f:facet>
+                                <h:commandLink  class="btn btn-danger" action="#{produtoBean.removeEspecificacao(item)}">
+                                    <f:ajax execute="@form" render="@form" />
+                                    <i class="fa fa-times"></i>
+                                </h:commandLink>
+                            </h:column>
+
+                        </h:dataTable>
                     </h:panelGroup>
 
                     <div class="form-group">
