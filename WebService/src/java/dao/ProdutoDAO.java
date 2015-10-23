@@ -1,11 +1,8 @@
 package dao;
 
-import java.util.ArrayList;
 import model.Produto;
 import java.util.List;
-import model.ProdutoEspecificacao;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 public class ProdutoDAO {

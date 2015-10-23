@@ -3,8 +3,6 @@ package dao;
 import model.ProdutoEspecificacao;
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.primefaces.expression.impl.ThisExpressionResolver;
 import util.HibernateUtil;
 
 public class ProdutoEspecificacaoDAO {

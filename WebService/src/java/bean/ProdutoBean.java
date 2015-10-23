@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import model.Categoria;
@@ -34,8 +35,8 @@ public class ProdutoBean {
     }
 
     public DataModel getProdutos() {
-        this.produtos = new ListDataModel(dao.findAll());
         clearSession();
+        this.produtos = new ListDataModel(dao.findAll());
         return produtos;
     }
 
@@ -44,6 +45,7 @@ public class ProdutoBean {
     }
 
     public String edit(Produto p) {
+        clearSession();
         this.produto = dao.findById(p.getPro_id());
         return "produtofrm";
     }
@@ -92,6 +94,7 @@ public class ProdutoBean {
     public List<Especificacao> getLsEspecificacao() {
         lsEspecificacao = espDAO.findAll();
         lsEspecificacaoAll = lsEspecificacao;
+//        reloadEspecificacoes();
         return lsEspecificacao;
     }
 
@@ -124,13 +127,13 @@ public class ProdutoBean {
                 pe.setEspecificacao(especificacao);
                 produto.getLsProdutoEspecificacao().add(pe);
             }
-            //reloadMaquinas();
+//            reloadEspecificacoes();
         }
     }
 
     public void removeEspecificacao(ProdutoEspecificacao pm) {
         this.produto.getLsProdutoEspecificacao().remove(pm);
-        //reloadMaquinas();
+//        reloadEspecificacoes();
     }
 
     private void clearSession() {
@@ -139,5 +142,27 @@ public class ProdutoBean {
         this.lsEspecificacaoAll = new ArrayList<>();
         this.especificacao = new Especificacao();
         this.produto = new Produto();
+        this.produtos = new ArrayDataModel();
+    }
+
+    private void reloadEspecificacoes() {
+        if (produto == null) {
+            produto = new Produto();
+        }
+        if (produto.getLsProdutoEspecificacao() == null) {
+            produto.setLsProdutoEspecificacao(new ArrayList<ProdutoEspecificacao>());
+        }
+        lsEspecificacao = new ArrayList<>();
+        for (Especificacao e : lsEspecificacaoAll) {
+            boolean bAdd = true;
+            for (ProdutoEspecificacao pe : produto.getLsProdutoEspecificacao()) {
+                if (pe.getEspecificacao().getEsp_id() == e.getEsp_id()) {
+                    bAdd = false;
+                }
+            }
+            if (bAdd) {
+                lsEspecificacao.add(e);
+            }
+        }
     }
 }
