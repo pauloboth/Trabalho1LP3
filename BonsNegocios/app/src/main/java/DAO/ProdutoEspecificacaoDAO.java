@@ -13,6 +13,7 @@ import Util.Conexao;
 
 public class ProdutoEspecificacaoDAO {
 
+
     public List<ProdutoEspecificacao> Seleciona(int pro_id){
         try {
             String url = Conexao.url.concat("Produto");
