@@ -10,4 +10,5 @@
     tools:showIn="@layout/activity_categoria"
     tools:context="com.example.aulas.bonsnegocios.Categoria">
 
+
 </RelativeLayout>

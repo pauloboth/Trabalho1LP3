@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Produtos"
-        android:id="@+id/btnListProdutos"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnprodutos" />
 
 </LinearLayout>

@@ -55,6 +55,7 @@ public class ProdutoDetalhesActivity extends AppCompatActivity {
         new CarregaEspecificacoes().execute();
     }
 
+
     private void SetProduto(){
         TextView nome = (TextView)findViewById(R.id.produtoNome);
         TextView desc = (TextView)findViewById(R.id.produtoDescricao);

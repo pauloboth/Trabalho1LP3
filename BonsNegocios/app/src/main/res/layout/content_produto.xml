@@ -24,6 +24,7 @@
         android:id="@+id/produtoListView"
         android:layout_gravity="center_horizontal" />
 
+
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"

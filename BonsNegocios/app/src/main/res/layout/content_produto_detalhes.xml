@@ -58,6 +58,7 @@
         android:text="Medium Text"
         android:id="@+id/produtoPreco" />
 
+
     <TextView
         style="@style/labelDetalhes"
         android:layout_width="wrap_content"
