@@ -1,8 +1,6 @@
 package Model;
 
-/**
- * Created by mateus on 23/10/15.
- */
+
 public class Categoria {
     private int cat_id;
     private String cat_nome;
@@ -38,6 +36,6 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return getCat_nome().toString();
+        return getCat_nome();
     }
 }

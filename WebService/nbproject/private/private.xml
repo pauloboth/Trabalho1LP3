@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/6º%20Semestre/Trabalho1LP3.git/trunk/WebService/src/java/service/ClienteServiceImpl.java</file>
+            <file>file:/home/mateus/Documentos/Trabalhos/Linguagem%20de%20Programação/Trabalho1LP3/WebService/src/java/dao/ProdutoEspecificacaoDAO.java</file>
+            <file>file:/home/mateus/Documentos/Trabalhos/Linguagem%20de%20Programação/Trabalho1LP3/WebService/src/java/model/Produto.java</file>
+            <file>file:/home/mateus/Documentos/Trabalhos/Linguagem%20de%20Programação/Trabalho1LP3/WebService/src/java/dao/ProdutoDAO.java</file>
         </group>
     </open-files>
 </project-private>

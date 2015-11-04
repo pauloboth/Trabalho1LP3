@@ -3,9 +3,6 @@ package Model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by mateus on 23/10/15.
- */
 public class Produto implements Serializable {
     private int pro_id;
     private String pro_nome;
@@ -13,6 +10,7 @@ public class Produto implements Serializable {
     private int pro_tipo;
     private int pro_status;
     private int pro_estoque;
+    private double pro_preco;
     private Date pro_cadastro;
 
     private Categoria categoria;
@@ -83,8 +81,16 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 
+    public double getPro_preco() {
+        return pro_preco;
+    }
+
+    public void setPro_preco(double pro_preco) {
+        this.pro_preco = pro_preco;
+    }
+
     @Override
     public String toString() {
-        return getPro_nome().toString();
+        return getPro_nome();
     }
 }
