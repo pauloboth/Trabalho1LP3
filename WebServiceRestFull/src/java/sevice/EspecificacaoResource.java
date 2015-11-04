@@ -37,7 +37,7 @@ public class EspecificacaoResource {
     @Path("Insert")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Insert(Especificacao e) {
-        dao.insert(e);
+        dao.save(e);
         return true;
     }
 
@@ -55,7 +55,7 @@ public class EspecificacaoResource {
     @Path("Update")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Update(Especificacao e) {
-        dao.update(e);
+        dao.save(e);
         return true;
     }
 }

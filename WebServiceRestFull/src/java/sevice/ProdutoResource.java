@@ -37,7 +37,7 @@ public class ProdutoResource {
     @Path("Insert")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Insert(Produto p) {
-        dao.insert(p);
+        dao.save(p);
         return true;
     }
 
@@ -55,7 +55,7 @@ public class ProdutoResource {
     @Path("Update")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Update(Produto p) {
-        dao.update(p);
+        dao.save(p);
         return true;
     }
 }

@@ -25,11 +25,6 @@ public class CategoriaBean {
         this.categorias = i;
     }
 
-    public String insert() {
-        dao.insert(categoria);
-        return "categorialst";
-    }
-
     public String edit(Categoria i) {
         categoria = (Categoria) categorias.getRowData();
         return "categoriafrm";
@@ -44,11 +39,7 @@ public class CategoriaBean {
     }
 
     public String salvar() {
-        if (categoria.getCat_id() > 0) {
-            dao.update(categoria);
-        } else {
-            dao.insert(categoria);
-        }
+        dao.save(categoria);
         return "categorialst";
     }
 

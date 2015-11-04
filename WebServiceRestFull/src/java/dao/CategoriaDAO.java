@@ -20,18 +20,14 @@ public class CategoriaDAO {
         return session;
     }
 
-    public void insert(Categoria i) {
+    public void save(Categoria i) {
         session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        session.save(i);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void update(Categoria i) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
-        session.update(i);
+        if (i.getCat_id() > 0) {
+            session.update(i);
+        } else {
+            session.save(i);
+        }
         session.getTransaction().commit();
         session.close();
     }
@@ -46,7 +42,7 @@ public class CategoriaDAO {
 
     public Categoria findById(int id) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Categoria m = (Categoria) session.load(Categoria.class, id);
+        Categoria m = (Categoria) session.get(Categoria.class, id);
         session.close();
         return m;
     }
@@ -54,8 +50,7 @@ public class CategoriaDAO {
     public List<Categoria> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Categoria> ls = session.createQuery("from Categoria").list();
-        session.close();
+//        session.close();
         return ls;
     }
-
 }

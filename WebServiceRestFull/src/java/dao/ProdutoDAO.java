@@ -20,18 +20,14 @@ public class ProdutoDAO {
         return session;
     }
 
-    public void insert(Produto i) {
+    public void save(Produto i) {
         session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        session.save(i);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void update(Produto i) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
-        session.update(i);
+        if (i.getPro_id() > 0) {
+            session.update(i);
+        } else {
+            session.save(i);
+        }
         session.getTransaction().commit();
         session.close();
     }
@@ -58,13 +54,13 @@ public class ProdutoDAO {
         return ls;
     }
 
-    public Produto findEdit(int id) {
+    public Produto findEdit(int pro_id) {
         session = HibernateUtil.getSessionFactory().openSession();
         Produto p = (Produto) session.createQuery("select p from Produto p "
                 + "left outer join fetch p.lsProdutoEspecificacao pe "
-                + "where p.pro_id = :p")
-                .setParameter("p", id).uniqueResult();
-        session.close();
+                + "where p.pro_id = :pro_id")
+                .setParameter("pro_id", pro_id).uniqueResult();
+//        session.close();
         return p;
     }
 }

@@ -37,7 +37,7 @@ public class CategoriaResource {
     @Path("Insert")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Insert(Categoria c) {
-        dao.insert(c);
+        dao.save(c);
         return true;
     }
 
@@ -55,7 +55,7 @@ public class CategoriaResource {
     @Path("Update")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public boolean Update(Categoria c) {
-        dao.update(c);
+        dao.save(c);
         return true;
     }
 }

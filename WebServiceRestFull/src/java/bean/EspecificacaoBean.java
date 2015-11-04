@@ -25,11 +25,6 @@ public class EspecificacaoBean {
         this.especificacoes = i;
     }
 
-    public String insert() {
-        dao.insert(especificacao);
-        return "especificacaolst";
-    }
-
     public String edit(Especificacao i) {
         especificacao = (Especificacao) especificacoes.getRowData();
         return "especificacaofrm";
@@ -44,11 +39,7 @@ public class EspecificacaoBean {
     }
 
     public String salvar() {
-        if (especificacao.getEsp_id() > 0) {
-            dao.update(especificacao);
-        } else {
-            dao.insert(especificacao);
-        }
+        dao.save(especificacao);
         return "especificacaolst";
     }
 
