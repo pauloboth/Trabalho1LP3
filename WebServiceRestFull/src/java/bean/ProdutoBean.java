@@ -4,7 +4,6 @@ import dao.CategoriaDAO;
 import dao.EspecificacaoDAO;
 import dao.ProdutoDAO;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -60,12 +59,7 @@ public class ProdutoBean {
     }
 
     public String salvar() {
-        if (this.produto.getPro_id() > 0) {
-            dao.update(this.produto);
-        } else {
-            this.produto.setPro_cadastro(new Date());
-            dao.insert(this.produto);
-        }
+        dao.save(this.produto);
         clearSession();
         return "produtolst";
     }
@@ -94,7 +88,7 @@ public class ProdutoBean {
     public List<Especificacao> getLsEspecificacao() {
         lsEspecificacao = espDAO.findAll();
         lsEspecificacaoAll = lsEspecificacao;
-//        reloadEspecificacoes();
+        reloadEspecificacoes();
         return lsEspecificacao;
     }
 
@@ -103,6 +97,9 @@ public class ProdutoBean {
     }
 
     public Especificacao getEspecificacao() {
+        if (lsEspecificacao != null && !lsEspecificacao.isEmpty()) {
+            especificacao = lsEspecificacao.get(0);
+        }
         return especificacao;
     }
 
@@ -127,13 +124,13 @@ public class ProdutoBean {
                 pe.setEspecificacao(especificacao);
                 produto.getLsProdutoEspecificacao().add(pe);
             }
-//            reloadEspecificacoes();
+            reloadEspecificacoes();
         }
     }
 
     public void removeEspecificacao(ProdutoEspecificacao pm) {
         this.produto.getLsProdutoEspecificacao().remove(pm);
-//        reloadEspecificacoes();
+        reloadEspecificacoes();
     }
 
     private void clearSession() {

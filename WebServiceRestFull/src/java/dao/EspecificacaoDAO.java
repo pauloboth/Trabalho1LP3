@@ -20,18 +20,14 @@ public class EspecificacaoDAO {
         return session;
     }
 
-    public void insert(Especificacao i) {
+    public void save(Especificacao i) {
         session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        session.save(i);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void update(Especificacao i) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
-        session.update(i);
+        if (i.getEsp_id() > 0) {
+            session.update(i);
+        } else {
+            session.save(i);
+        }
         session.getTransaction().commit();
         session.close();
     }
@@ -54,7 +50,7 @@ public class EspecificacaoDAO {
     public List<Especificacao> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Especificacao> ls = session.createQuery("from Especificacao").list();
-        session.close();
+//        session.close();
         return ls;
     }
 
