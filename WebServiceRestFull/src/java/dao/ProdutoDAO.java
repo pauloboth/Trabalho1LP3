@@ -23,7 +23,7 @@ public class ProdutoDAO {
     public void save(Produto i) {
         session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        if (i.getPro_id()> 0) {
+        if (i.getPro_id() > 0) {
             session.update(i);
         } else {
             session.save(i);
@@ -52,5 +52,18 @@ public class ProdutoDAO {
         List<Produto> ls = session.createQuery("from Produto").list();
         session.close();
         return ls;
+    }
+
+    public Produto findEdit(int pro_id) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        // Query para retornar o Produto e as especificações (fetch)
+        Produto p = (Produto) session.createQuery("select p from Produto p "
+                + "left outer join fetch p.lsProdutoEspecificacao pe "
+                + "where p.pro_id = :pro_id")
+                .setParameter("pro_id", pro_id)
+                .uniqueResult();
+
+        session.close();
+        return p;
     }
 }
