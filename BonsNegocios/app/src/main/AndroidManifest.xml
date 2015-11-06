@@ -20,31 +20,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Categoria"
+            android:name=".CategoriaActivity"
             android:label="@string/title_activity_categoria"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.aulas.bonsnegocios.MainActivity" />
+
         </activity>
         <activity
             android:name=".ProdutoActivity"
             android:label="@string/title_activity_produto"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.aulas.bonsnegocios.MainActivity" />
+
         </activity>
         <activity
             android:name=".ProdutoDetalhesActivity"
             android:label="@string/title_activity_produto_detalhes"
             android:parentActivityName=".ProdutoActivity"
             android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.aulas.bonsnegocios.ProdutoActivity" />
+
         </activity>
     </application>
 
