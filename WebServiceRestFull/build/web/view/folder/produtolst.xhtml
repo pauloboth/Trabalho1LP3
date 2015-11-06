@@ -31,7 +31,24 @@
                         </f:facet>
                         <h:outputText value="${item.getPro_nome()}"/>
                     </h:column>
-
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Preço"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPro_preco()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="${item.toStatus()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="${item.toTipo()}"/>
+                    </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import model.Categoria;
 import model.Especificacao;
 import model.Produto;
 import model.ProdutoEspecificacao;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @SessionScoped
@@ -22,19 +22,29 @@ public class ProdutoBean {
     private Produto produto = new Produto();
     private ProdutoDAO dao = new ProdutoDAO();
     private CategoriaDAO catDAO = new CategoriaDAO();
-    private List<Categoria> lsCategorias;
     private EspecificacaoDAO espDAO = new EspecificacaoDAO();
-    private List<Especificacao> lsEspecificacao = new ArrayList<>();
-    private List<Especificacao> lsEspecificacaoAll = new ArrayList<>();
+
+    private List<Categoria> lsCategorias = new ArrayList<>();
+    private List<Especificacao> lsEspecificacoes = new ArrayList<>();
+    private List<Especificacao> lsEspecificacoesAll = new ArrayList<>();
     private Especificacao especificacao = new Especificacao();
 
     private DataModel produtos;
+    private UploadedFile image;
+
+    public UploadedFile getImage() {
+        return image;
+    }
+
+    public void setImage(UploadedFile image) {
+        this.image = image;
+    }
 
     public ProdutoBean() {
     }
 
     public DataModel getProdutos() {
-        clearSession();
+        ClearSession();
         this.produtos = new ListDataModel(dao.findAll());
         return produtos;
     }
@@ -43,24 +53,23 @@ public class ProdutoBean {
         this.produtos = i;
     }
 
-    public String edit(Produto p) {
-        clearSession();
-        this.produto = dao.findById(p.getPro_id());
+    public String edit(Produto i) {
+        ClearSession();
+        produto = dao.findEdit(i.getPro_id());
         return "produtofrm";
     }
 
-    public String delete(Produto p) {
+    public String delete(Produto i) {
         try {
-            dao.delete(p);
+            dao.delete(i);
         } catch (Exception e) {
         }
-        clearSession();
         return "produtolst";
     }
 
     public String salvar() {
-        dao.save(this.produto);
-        clearSession();
+        dao.save(produto);
+        ClearSession();
         return "produtolst";
     }
 
@@ -69,7 +78,7 @@ public class ProdutoBean {
     }
 
     public Produto getProduto() {
-        return this.produto;
+        return produto;
     }
 
     public void setProduto(Produto produto) {
@@ -77,40 +86,52 @@ public class ProdutoBean {
     }
 
     public List<Categoria> getLsCategorias() {
-        this.lsCategorias = catDAO.findAll();
+        lsCategorias = catDAO.findAll();
         return lsCategorias;
     }
 
-    public void setLsCategorias(List<Categoria> lsCategorias) {
-        this.lsCategorias = lsCategorias;
+    public List<Especificacao> getLsEspecificacoes() {
+        lsEspecificacoes = espDAO.findAll();
+        lsEspecificacoesAll = lsEspecificacoes;
+        ReloadEspecificacoes();
+        return lsEspecificacoes;
     }
 
-    public List<Especificacao> getLsEspecificacao() {
-        lsEspecificacao = espDAO.findAll();
-        lsEspecificacaoAll = lsEspecificacao;
-        reloadEspecificacoes();
-        return lsEspecificacao;
-    }
-
-    public void setLsEspecificacao(List<Especificacao> lsEspecificacao) {
-        this.lsEspecificacao = lsEspecificacao;
-    }
-
-    public Especificacao getEspecificacao() {
-        if (lsEspecificacao != null && !lsEspecificacao.isEmpty()) {
-            especificacao = lsEspecificacao.get(0);
+    private void ReloadEspecificacoes() {
+        lsEspecificacoes = new ArrayList<>();
+        if (lsEspecificacoesAll != null && !lsEspecificacoesAll.isEmpty()) {
+            for (Especificacao e : lsEspecificacoesAll) {
+                boolean bAdd = true;
+                if (produto != null && produto.getLsProdutoEspecificacao() != null) {
+                    for (ProdutoEspecificacao pe : produto.getLsProdutoEspecificacao()) {
+                        if (e.getEsp_id() == pe.getEspecificacao().getEsp_id()) {
+                            bAdd = false;
+                        }
+                    }
+                }
+                if (bAdd) {
+                    lsEspecificacoes.add(e);
+                }
+            }
         }
-        return especificacao;
     }
 
-    public void setEspecificacao(Especificacao especificacao) {
-        this.especificacao = especificacao;
+    public void removeEsp(ProdutoEspecificacao pe) {
+        if (produto != null && produto.getLsProdutoEspecificacao() != null) {
+            produto.getLsProdutoEspecificacao().remove(pe);
+        }
     }
 
     public void addEspecificacao() {
         if (especificacao != null) {
+            if (produto == null) {
+                produto = new Produto();
+            }
             if (produto.getLsProdutoEspecificacao() == null) {
                 produto.setLsProdutoEspecificacao(new ArrayList<ProdutoEspecificacao>());
+            }
+            if (especificacao == null) {
+                especificacao = new Especificacao();
             }
             boolean bAdd = true;
             for (ProdutoEspecificacao pe : produto.getLsProdutoEspecificacao()) {
@@ -120,46 +141,28 @@ public class ProdutoBean {
             }
             if (bAdd) {
                 ProdutoEspecificacao pe = new ProdutoEspecificacao();
-                pe.setProduto(produto);
                 pe.setEspecificacao(especificacao);
+                pe.setProduto(produto);
                 produto.getLsProdutoEspecificacao().add(pe);
             }
-            reloadEspecificacoes();
+            ReloadEspecificacoes();
         }
     }
 
-    public void removeEspecificacao(ProdutoEspecificacao pm) {
-        this.produto.getLsProdutoEspecificacao().remove(pm);
-        reloadEspecificacoes();
+    public Especificacao getEspecificacao() {
+        return especificacao;
     }
 
-    private void clearSession() {
+    public void setEspecificacao(Especificacao especificacao) {
+        this.especificacao = especificacao;
+    }
+
+    private void ClearSession() {
         this.lsCategorias = new ArrayList<>();
-        this.lsEspecificacao = new ArrayList<>();
-        this.lsEspecificacaoAll = new ArrayList<>();
+        this.lsEspecificacoes = new ArrayList<>();
+        this.lsEspecificacoesAll = new ArrayList<>();
         this.especificacao = new Especificacao();
         this.produto = new Produto();
-        this.produtos = new ArrayDataModel();
     }
 
-    private void reloadEspecificacoes() {
-        if (produto == null) {
-            produto = new Produto();
-        }
-        if (produto.getLsProdutoEspecificacao() == null) {
-            produto.setLsProdutoEspecificacao(new ArrayList<ProdutoEspecificacao>());
-        }
-        lsEspecificacao = new ArrayList<>();
-        for (Especificacao e : lsEspecificacaoAll) {
-            boolean bAdd = true;
-            for (ProdutoEspecificacao pe : produto.getLsProdutoEspecificacao()) {
-                if (pe.getEspecificacao().getEsp_id() == e.getEsp_id()) {
-                    bAdd = false;
-                }
-            }
-            if (bAdd) {
-                lsEspecificacao.add(e);
-            }
-        }
-    }
 }

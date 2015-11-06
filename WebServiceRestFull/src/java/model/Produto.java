@@ -30,7 +30,7 @@ public class Produto implements Serializable {
     private int pro_tipo;
     private int pro_status;
     private int pro_estoque;
-    private Date pro_cadastro;
+    private Date pro_data;
     private double pro_preco;
 
     @ManyToOne
@@ -91,20 +91,12 @@ public class Produto implements Serializable {
         this.pro_estoque = pro_estoque;
     }
 
-    public Date getPro_cadastro() {
-        return pro_cadastro;
+    public Date getPro_data() {
+        return pro_data;
     }
 
-    public void setPro_cadastro(Date pro_cadastro) {
-        this.pro_cadastro = pro_cadastro;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setPro_data(Date pro_data) {
+        this.pro_data = pro_data;
     }
 
     public double getPro_preco() {
@@ -113,6 +105,14 @@ public class Produto implements Serializable {
 
     public void setPro_preco(double pro_preco) {
         this.pro_preco = pro_preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public List<ProdutoEspecificacao> getLsProdutoEspecificacao() {
@@ -125,8 +125,8 @@ public class Produto implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + this.pro_id;
+        int hash = 5;
+        hash = 97 * hash + this.pro_id;
         return hash;
     }
 
@@ -149,4 +149,25 @@ public class Produto implements Serializable {
         return getPro_nome();
     }
 
+    public String toStatus() {
+        if (pro_status == 1) {
+            return "Ativo";
+        } else if (pro_status == 2) {
+            return "Bloqueado";
+        } else if (pro_status == 3) {
+            return "Deletado";
+        } else {
+            return "Nenhum";
+        }
+    }
+
+    public String toTipo() {
+        if (pro_tipo == 1) {
+            return "Produto";
+        } else if (pro_tipo == 2) {
+            return "Serviço";
+        } else {
+            return "Nenhum";
+        }
+    }
 }

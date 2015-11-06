@@ -50,7 +50,7 @@ public class CategoriaDAO {
     public List<Categoria> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Categoria> ls = session.createQuery("from Categoria").list();
-//        session.close();
+        session.close();
         return ls;
     }
 }

@@ -1,10 +1,11 @@
 package converter;
 
 import dao.ProdutoDAO;
+import model.Produto;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
-import model.Produto;
 
 @FacesConverter("produtoConverter")
 public class ProdutoConverter implements javax.faces.convert.Converter {

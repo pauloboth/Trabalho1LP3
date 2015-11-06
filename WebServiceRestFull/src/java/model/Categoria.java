@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name = "categoria")
 @XmlRootElement
 public class Categoria implements Serializable {
 
@@ -40,7 +42,7 @@ public class Categoria implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.cat_id;
+        hash = 43 * hash + this.cat_id;
         return hash;
     }
 
@@ -59,7 +61,6 @@ public class Categoria implements Serializable {
         return true;
     }
 
-    @Override
     public String toString() {
         return getCat_nome();
     }

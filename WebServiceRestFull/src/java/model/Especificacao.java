@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name = "especificacao")
 @XmlRootElement
 public class Especificacao implements Serializable {
 
@@ -57,8 +59,8 @@ public class Especificacao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.esp_id;
+        int hash = 3;
+        hash = 79 * hash + this.esp_id;
         return hash;
     }
 
@@ -81,4 +83,15 @@ public class Especificacao implements Serializable {
         return getEsp_nome();
     }
 
+    public String toStatus() {
+        if (esp_status == 1) {
+            return "Ativo";
+        } else if (esp_status == 2) {
+            return "Bloqueado";
+        } else if (esp_status == 3) {
+            return "Deletado";
+        } else {
+            return "Nenhum";
+        }
+    }
 }

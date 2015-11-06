@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name = "produtoespecificacao")
 @XmlRootElement
 public class ProdutoEspecificacao implements Serializable {
 
@@ -21,7 +23,10 @@ public class ProdutoEspecificacao implements Serializable {
     @JoinColumn(name = "esp_id", referencedColumnName = "esp_id")
     private Especificacao especificacao;
 
-    private String prs_descricao;
+    private String prs_valor;
+
+    public ProdutoEspecificacao() {
+    }
 
     public Produto getProduto() {
         return produto;
@@ -39,12 +44,12 @@ public class ProdutoEspecificacao implements Serializable {
         this.especificacao = especificacao;
     }
 
-    public String getPrs_descricao() {
-        return prs_descricao;
+    public String getPrs_valor() {
+        return prs_valor;
     }
 
-    public void setPrs_descricao(String prs_descricao) {
-        this.prs_descricao = prs_descricao;
+    public void setPrs_valor(String prs_valor) {
+        this.prs_valor = prs_valor;
     }
 
 }

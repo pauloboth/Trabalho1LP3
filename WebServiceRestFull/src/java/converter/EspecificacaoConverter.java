@@ -1,11 +1,11 @@
 package converter;
 
 import dao.EspecificacaoDAO;
+import model.Especificacao;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
-import model.Especificacao;
-
 
 @FacesConverter("especificacaoConverter")
 public class EspecificacaoConverter implements javax.faces.convert.Converter {

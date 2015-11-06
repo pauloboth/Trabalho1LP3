@@ -56,11 +56,14 @@ public class ProdutoDAO {
 
     public Produto findEdit(int pro_id) {
         session = HibernateUtil.getSessionFactory().openSession();
+        // Query para retornar o Produto e as especificações (fetch)
         Produto p = (Produto) session.createQuery("select p from Produto p "
                 + "left outer join fetch p.lsProdutoEspecificacao pe "
                 + "where p.pro_id = :pro_id")
-                .setParameter("pro_id", pro_id).uniqueResult();
-//        session.close();
+                .setParameter("pro_id", pro_id)
+                .uniqueResult();
+
+        session.close();
         return p;
     }
 }

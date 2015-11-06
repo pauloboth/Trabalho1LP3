@@ -74,29 +74,6 @@
                                     <span class="menu-text">Especificações</span>
                                 </h:link>
                             </li>
-
-                            <li class="menu-dropdown #{view.viewId.contains('/cfg/') ? 'open' : ''}">
-                                <a href="javascript:void(0);">
-                                    <span class="fa fa-cogs"></span>
-                                    <span class="menu-text">Configurações</span>
-                                    <span class="fa dropdown-chevron pull-right"></span>
-                                </a>
-                                <ul class="submenu">
-                                    <li class="#{view.viewId.contains('/usuario') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/set/usuariolst">
-                                            <span class="fa fa-users"></span>
-                                            <span class="menu-text">Usuários</span>
-                                        </h:link>
-                                    </li>
-                                    <li class="#{view.viewId.contains('/pessoa') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/set/pessoalst">
-                                            <span class="fa fa-user"></span>
-                                            <span class="menu-text">Pessoas</span>
-                                        </h:link>
-                                    </li>
-                                </ul>
-                            </li>
-
                         </ul>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ public class EspecificacaoDAO {
 
     public Especificacao findById(int id) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Especificacao m = (Especificacao) session.load(Especificacao.class, id);
+        Especificacao m = (Especificacao) session.get(Especificacao.class, id);
         session.close();
         return m;
     }
@@ -50,8 +50,7 @@ public class EspecificacaoDAO {
     public List<Especificacao> findAll() {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Especificacao> ls = session.createQuery("from Especificacao").list();
-//        session.close();
+        session.close();
         return ls;
     }
-
 }
