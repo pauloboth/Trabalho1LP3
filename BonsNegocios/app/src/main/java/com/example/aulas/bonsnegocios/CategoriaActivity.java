@@ -46,6 +46,8 @@ public class CategoriaActivity extends AppCompatActivity {
             }
         });
 */
+        /*adpGrupo = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);*/
+        adpCategoria = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         listView = (ListView) findViewById(R.id.categoriaListView);
         new CarregaRegistros().execute();
     }
@@ -53,9 +55,7 @@ public class CategoriaActivity extends AppCompatActivity {
     protected void AtualizaGrid(List<Categoria> lsItem){
         if(lsItem!=null) {
             adpCategoria.clear();
-            for (Categoria pd : lsItem) {
-                adpCategoria.add(pd);//converte object em Grupo
-            }
+            for (Categoria pd : lsItem) adpCategoria.add(pd);//converte object em Grupo
             listView.setAdapter(adpCategoria);
         }
     }

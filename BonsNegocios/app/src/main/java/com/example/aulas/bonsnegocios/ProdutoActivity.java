@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,8 +19,8 @@ import Model.Produto;
 public class ProdutoActivity extends AppCompatActivity {
 
     private ListView produtoListView;
-      //static public List<Produto> lsItems;
-   // private Button btnNovo;
+    //static public List<Produto> lsItems;
+    // private Button btnNovo;
     private ArrayAdapter<Produto> adpProduto;
     private ProdutoDAO DAO = new ProdutoDAO();
 
@@ -33,7 +32,7 @@ public class ProdutoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);*/
 
 
-
+        adpProduto = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
         produtoListView = (ListView) findViewById(R.id.produtoListView);
 
