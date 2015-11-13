@@ -3,6 +3,7 @@ package com.example.aulas.bonsnegocios;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,15 @@ public class ProdutoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             Intent i = new Intent(ProdutoActivity.this, ProdutoActivityForm.class);
+                startActivity(i);
+            }
+        });
     }
 
 
@@ -52,12 +62,9 @@ public class ProdutoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("--ACAO--", "onRESUME");
+        adpProduto.clear();
         new CarregaRegistros().execute();
-       /* if(msn!=null&& !msn.isEmpty()){
-            Toast t = Toast.makeText(this,msn,Toast.LENGTH_SHORT);
-            t.show();
-            msn = null;
-        }*/
+
     }
 
     protected void AtualizaGrid(List<Produto> lsItem){
@@ -77,7 +84,7 @@ public class ProdutoActivity extends AppCompatActivity {
             try{
                 return DAO.SelecionaProduto();
             }catch (Exception e){
-                Log.e("CARREGA-GRUPOS",e.getMessage(),e);
+                Log.e("CARREGA",e.getMessage());
             }
             return null;
         }

@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Produto implements Serializable {
     private int pro_id;
@@ -11,9 +10,7 @@ public class Produto implements Serializable {
     private int pro_status;
     private int pro_estoque;
     private double pro_preco;
-    private Date pro_cadastro;
 
-    private Categoria categoria;
 
     public Produto(){}
 
@@ -63,22 +60,6 @@ public class Produto implements Serializable {
 
     public void setPro_estoque(int pro_estoque) {
         this.pro_estoque = pro_estoque;
-    }
-
-    public Date getPro_cadastro() {
-        return pro_cadastro;
-    }
-
-    public void setPro_cadastro(Date pro_cadastro) {
-        this.pro_cadastro = pro_cadastro;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 
     public double getPro_preco() {

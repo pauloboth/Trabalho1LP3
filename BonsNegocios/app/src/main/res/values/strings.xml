@@ -3,4 +3,5 @@
     <string name="title_activity_categoria">Categoria</string>
     <string name="title_activity_produto">Produto</string>
     <string name="title_activity_produto_detalhes">ProdutoDetalhesActivity</string>
+    <string name="title_activity_produto_activity_form">Cadastro de Produto</string>
 </resources>
