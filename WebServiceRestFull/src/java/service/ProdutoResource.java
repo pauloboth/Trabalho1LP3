@@ -1,6 +1,7 @@
 package service;
 
 import dao.ProdutoDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
@@ -20,17 +21,33 @@ public class ProdutoResource {
     }
 
     @GET
-//     @Path("SelectAllProduto")
-    @Produces({MediaType.APPLICATION_JSON})
+    //@Path("SelectAll")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Produto> SelectAll() {
-        return dao.findAll();
+        List<Produto> lsP = dao.findAll();
+        if (lsP != null) {
+            for (Produto p : lsP) {
+                p.setCategoria(null);
+                p.setLsProdutoEspecificacao(null);
+            }
+        } else {
+            lsP = new ArrayList<>();
+        }
+        return lsP;
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Produto SelectOne(@PathParam("id") Integer i) {
-        return dao.findById(i);
+        Produto p = dao.findById(i);
+        if (p != null) {
+            p.setCategoria(null);
+            p.setLsProdutoEspecificacao(null);
+        } else {
+            p = new Produto();
+        }
+        return p;
     }
 
     @POST

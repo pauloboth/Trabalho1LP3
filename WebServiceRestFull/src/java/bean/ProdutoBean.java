@@ -3,16 +3,25 @@ package bean;
 import dao.CategoriaDAO;
 import dao.EspecificacaoDAO;
 import dao.ProdutoDAO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.imageio.ImageIO;
 import model.Categoria;
 import model.Especificacao;
 import model.Produto;
 import model.ProdutoEspecificacao;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean
@@ -36,7 +45,54 @@ public class ProdutoBean {
         return image;
     }
 
+    public void handleFileUpload(FileUploadEvent event) {
+        try {
+//            File file = new File("/faces/resources/productImages/" + event.getFile().getFileName());
+            File file = new File(event.getFile().getFileName());
+            InputStream inputStream = event.getFile().getInputstream();
+            BufferedImage imagem = ImageIO.read(inputStream);
+            ImageIO.write(imagem, "jpg", file);
+//            OutputStream out = new FileOutputStream(file);
+//            int read = 0;
+//            byte[] bytes = new byte[1024];
+//
+//            while ((read = inputStream.read(bytes)) != -1) {
+//                out.write(bytes, 0, read);
+//            }
+//            inputStream.close();
+//            out.flush();
+//            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setImage(UploadedFile image) {
+        try {
+            File targetFolder = new File("/faces/resources/productImages");
+            InputStream inputStream = image.getInputstream();
+            Random ran = new Random();
+            String name = "";
+            for (int i = 0; i < 10; i++) {
+                name += ran.nextInt(10) + "";
+            }
+            name += ".jpg";
+//            OutputStream out = new FileOutputStream(new File(targetFolder, name));
+            OutputStream out = new FileOutputStream(new File(targetFolder,
+                    image.getFileName()));
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            inputStream.close();
+            out.flush();
+            out.close();
+            produto.setPro_imagem("/faces/productImages/" + name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.image = image;
     }
 
