@@ -35,7 +35,11 @@
                         <f:facet name="header">
                             <h:outputText value="Preço"/>
                         </f:facet>
-                        <h:outputText value="${item.getPro_preco()}"/>
+                        <div style="text-align: right">
+                            <h:outputText value="${item.getPro_preco()}">
+                                <f:convertNumber currencySymbol="R$" type="currency" />
+                            </h:outputText>
+                        </div>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

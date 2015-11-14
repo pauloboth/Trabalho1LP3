@@ -26,12 +26,16 @@
         <!--        {loginBean.setUsuarioByLogin(request.getRemoteUser())}-->
         <div class="page-container">
             <div class="page-header navbar navbar-static-top">
-                <div class="page-logo">
-                    <h:link outcome="/faces/view/index">
+                <div class="page-logo" >
+                    <h:link outcome="/faces/view/index" style="font-size: 50px; text-decoration: none; color: #BB0000;">
+                        Bons Negócios
                         <!--                        <h1 class="logo">
                                                     <h:graphicImage alt="SERIPLAST Serigrafia" name="img/logo.jpg" style="width: 300px;"></h:graphicImage>
                                                 </h1>-->
                     </h:link>
+                </div>
+                <div class="page-title" style="text-align: center;float: left; margin-left: 20%;">
+                    <h2 style="font-size: 40px"><ui:insert name="title">Início</ui:insert></h2>
                 </div>
                 <div class="page-topmenu pull-right">
                     <ul class="nav navbar-nav pull-right">
@@ -74,15 +78,31 @@
                                     <span class="menu-text">Especificações</span>
                                 </h:link>
                             </li>
+                            <li class="#{view.viewId == '/view/folder/grupolst.xhtml' ? 'active' : ''}">
+                                <h:link outcome="/faces/view/folder/grupolst">
+                                    <span class="fa fa-users"></span>
+                                    <span class="menu-text">Grupos</span>
+                                </h:link>
+                            </li>
+                            <li class="#{view.viewId == '/view/folder/pessoalst.xhtml' ? 'active' : ''}">
+                                <h:link outcome="/faces/view/folder/pessoalst">
+                                    <span class="fa fa-user"></span>
+                                    <span class="menu-text">Pessoas</span>
+                                </h:link>
+                            </li>
+
+                            <li class="#{view.viewId == '/view/folder/propostalst.xhtml' ? 'active' : ''}">
+                                <h:link outcome="/faces/view/folder/propostalst">
+                                    <span class="fa fa-money"></span>
+                                    <span class="menu-text">Propostas</span>
+                                </h:link>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="page-content-wrapper">
                     <div class="page-content">
-                        <div class="page-title">
-                            <h2><ui:insert name="title">Início</ui:insert></h2>
-                        </div>
                         <ui:fragment rendered="#{empty no_breadcrumb}">
                             <ul class="breadcrumb">
                                 <li>

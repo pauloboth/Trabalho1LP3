@@ -1,0 +1,116 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="header">
+    </ui:define>
+    <ui:define name="title">Pessoas</ui:define>
+
+    <ui:define name="breadcrumb">
+        <li><h:link value="Pessoas" outcome="/faces/view/folder/pessoalst" /></li>
+        <li><h:link value="Pessoa"/></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <style>
+            .form-group select{
+                height: 34px;
+            }
+        </style>
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados da Pessoa"/></h3>
+            <f:view>
+                <h:form enctype="multipart/form-data" styleClass="form-horizontal" id="frmProduto">
+                    <h:inputHidden id="idiCodigo" value="#{pessoaBean.pessoa.pes_id}" />
+                    <div class="row">
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="nome" class="col-sm-4 control-label">Nome*:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText pt:required="required" id="nome" value="#{pessoaBean.pessoa.pes_nome}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="email" class="col-sm-4 control-label">E-mail*:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText pt:required="required" id="email" value="#{pessoaBean.pessoa.pes_email}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="pais" class="col-sm-4 control-label">País:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText id="pais" value="#{pessoaBean.pessoa.pes_pais}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="estado" class="col-sm-4 control-label">Estado:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText id="estado" value="#{pessoaBean.pessoa.pes_estado}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="cidade" class="col-sm-4 control-label">Cidade:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText id="cidade" value="#{pessoaBean.pessoa.pes_cidade}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="grupo" class="col-sm-4 control-label">Grupo*: </label>
+                                <div class="col-sm-8">
+                                    <h:selectOneMenu id="grupo" converter="grupoConverter" value="#{pessoaBean.pessoa.grupo}" styleClass="form-control" pt:autofocus="" >
+                                        <f:selectItems value="#{pessoaBean.lsGrupo}" var="gru" itemLabel="#{gru.toString()}" itemValue="#{gru}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="login" class="col-sm-4 control-label">Login*:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText id="login" pt:required="required"  value="#{pessoaBean.pessoa.pes_login}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="senha" class="col-sm-4 control-label">Senha*:</label>
+                                <div class="col-sm-8">
+                                    <h:inputText pt:type="password" pt:required="required"  id="senha" value="#{pessoaBean.pessoa.pes_senha}" styleClass="form-control" pt:autofocus="" />
+                                </div>  
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                                <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{pessoaBean.listar()}" />
+                                <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{pessoaBean.salvar()}"></h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>
