@@ -114,8 +114,8 @@
     color: #bebebe;
 }
 body {
-    /*    background: url("/Seriplast/faces/resources/img/body.jpg") no-repeat;*/
-    background: hsla(0, 80%, 43%, 0.68);
+    background: url('/WebServiceRestFull/faces/resources/img/fundo.jpg');
+    /*    background: hsla(0, 80%, 43%, 0.68);*/
     color: #777777;
 }
 
