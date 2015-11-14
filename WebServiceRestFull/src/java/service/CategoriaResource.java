@@ -1,6 +1,7 @@
 package service;
 
 import dao.CategoriaDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
@@ -23,14 +24,22 @@ public class CategoriaResource {
 //     @Path("SelectAllProduto")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Categoria> SelectAll() {
-        return dao.findAll();
+        List<Categoria> lsCat = dao.findAll();
+        if (lsCat == null) {
+            lsCat = new ArrayList<>();
+        }
+        return lsCat;
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Categoria SelectOne(@PathParam("id") Integer i) {
-        return dao.findById(i);
+        Categoria c = dao.findById(i);
+        if (c == null) {
+            c = new Categoria();
+        }
+        return c;
     }
 
     @POST

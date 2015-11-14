@@ -32,6 +32,7 @@ public class Produto implements Serializable {
     private int pro_estoque;
     private Date pro_data;
     private double pro_preco;
+    private String pro_imagem;
 
     @ManyToOne
     @JoinColumn(name = "cat_id", referencedColumnName = "cat_id")
@@ -123,6 +124,14 @@ public class Produto implements Serializable {
         this.lsProdutoEspecificacao = lsProdutoEspecificacao;
     }
 
+    public String getPro_imagem() {
+        return pro_imagem;
+    }
+
+    public void setPro_imagem(String pro_imagem) {
+        this.pro_imagem = pro_imagem;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -150,24 +159,26 @@ public class Produto implements Serializable {
     }
 
     public String toStatus() {
-        if (pro_status == 1) {
-            return "Ativo";
-        } else if (pro_status == 2) {
-            return "Bloqueado";
-        } else if (pro_status == 3) {
-            return "Deletado";
-        } else {
-            return "Nenhum";
+        switch (pro_status) {
+            case 1:
+                return "Ativo";
+            case 2:
+                return "Bloqueado";
+            case 3:
+                return "Deletado";
+            default:
+                return "Nenhum";
         }
     }
 
     public String toTipo() {
-        if (pro_tipo == 1) {
-            return "Produto";
-        } else if (pro_tipo == 2) {
-            return "Serviço";
-        } else {
-            return "Nenhum";
+        switch (pro_tipo) {
+            case 1:
+                return "Produto";
+            case 2:
+                return "Serviço";
+            default:
+                return "Nenhum";
         }
     }
 }
